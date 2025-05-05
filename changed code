@@ -1,0 +1,118 @@
+Normal code:
+
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class PlayerController : MonoBehaviour
+{
+    public float speed = 5f;
+    public float jumpSpeed = 8f;
+    private float direction = 0f;
+    private Rigidbody2D player;
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        player = GetComponent<Rigidbody2D>();
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        direction = Input.GetAxis("Horizontal");
+
+        if (direction > 0f)
+        {
+            player.linearVelocity = new Vector2(direction * speed, player.linearVelocity.y);
+        }
+        else if (direction < 0f)
+        {
+            player.linearVelocity = new Vector2(direction * speed, player.linearVelocity.y);
+        }
+        else
+        {
+            player.linearVelocity = new Vector2(0, player.linearVelocity.y);
+        }
+
+        if (Input.GetButtonDown("Jump"))
+        {
+            player.linearVelocity = new Vector2(player.linearVelocity.x, jumpSpeed);
+        }
+    }
+}
+
+Changed:
+
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class PlayerController : MonoBehaviour
+{
+    public float speed = 5f;
+    public float jumpSpeed = 5f;
+    private float direction = 0f;
+    private Rigidbody2D player;
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        player = GetComponent<Rigidbody2D>();
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        direction = Input.GetAxis("Horizontal");
+
+        if (direction > 0f)
+        {
+            player.linearVelocity = new Vector2(direction * speed, player.linearVelocity.y);
+        }
+        else if (direction < 0f)
+        {
+            player.linearVelocity = new Vector2(direction * speed, player.linearVelocity.y);
+        }
+        else
+        {
+            player.linearVelocity = new Vector2(0, player.linearVelocity.y);
+        }
+
+        if (Input.GetButtonDown("Jump"))
+        {
+            player.linearVelocity = new Vector2(player.linearVelocity.x, jumpSpeed);
+
+          Neils code (All done by him):
+          using UnityEngine;
+
+public class feather_script : MonoBehaviour
+{
+    public float decreaseAmount;
+    private bool startFalling = false;
+    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    void Start()
+    {
+        
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+                if (startFalling){
+                     transform.position = new Vector3(transform.position.x, transform.position.y - decreaseAmount, transform.position.z);
+                }
+    }
+    private void OnCollisionEnter2D(Collision2D other) 
+    {
+        if (other.gameObject.name == "Player")
+        {
+           startFalling = true;
+        }
+    }
+}
+
+        }
+    }
+}
+
